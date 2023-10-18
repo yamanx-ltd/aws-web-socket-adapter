@@ -12,7 +12,7 @@ env:
   DOWNSTREAM_BRANCH: "main"
 on:
   schedule:
-    - cron: "* * * * *"
+    - cron: '* * * * *'
   # Allows manual workflow run (must in default branch to work)
   workflow_dispatch:
 
