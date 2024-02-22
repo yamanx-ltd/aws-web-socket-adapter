@@ -11,7 +11,7 @@ jobs:
       LambdaName: WebSocketAdaptorRestOnlineListFunction
     strategy:
       matrix:
-        dotnet: [ '6.0.x' ]
+        dotnet: [ '8.0.x' ]
     
     name: Authorizer Deploy - JOB
 
@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-dotnet@v2
         with:
           fetch-depth: 0
-          dotnet-version: '6.0.x'
+          dotnet-version: '8.0.x'
               
       - name: Publish
         run: dotnet publish -c Release src/Adapter/Adapter.csproj
@@ -30,7 +30,7 @@ jobs:
         
       - name: Zip Publish Output
         run: zip -qq -r ./bundle.zip ./
-        working-directory: src/Adapter/bin/Release/net6.0/publish
+        working-directory: src/Adapter/bin/Release/net8.0/publish
       
       - name: deploy by aws cli
         uses: aws-actions/configure-aws-credentials@v1
@@ -41,4 +41,4 @@ jobs:
           
       - name: AWS Deploy
         run: |
-          aws lambda update-function-code --function-name ${{ env.LambdaName }} --zip-file fileb://src/Adapter/bin/Release/net6.0/publish/bundle.zip    
+          aws lambda update-function-code --function-name ${{ env.LambdaName }} --zip-file fileb://src/Adapter/bin/Release/net8.0/publish/bundle.zip    
