@@ -42,3 +42,4 @@ jobs:
       - name: AWS Deploy
         run: |
           aws lambda update-function-code --function-name ${{ env.LambdaName }} --zip-file fileb://src/Adapter/bin/Release/net8.0/publish/bundle.zip    
+
